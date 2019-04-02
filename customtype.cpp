@@ -5,6 +5,7 @@
 std::vector<byte> ByteType::getBytes(){return this->bytes;}
 
 void ByteType::setBytes(std::vector<byte> bytes){
+    this->bytes.clear();
     for(byte i : bytes)
         this->bytes.push_back(i);
 }
