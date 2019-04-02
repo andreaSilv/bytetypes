@@ -29,7 +29,12 @@ T CustomType<T>::get()
 {
     T value;
     byte* buffer = (byte*)&value;
-
+	
+	if(!this->littleEndian)
+    {
+        std::reverse(this->bytes.begin(), this->bytes.end());
+    }
+	
     for(size_t i=0 ; i<this->bytes.size() ; i++)
         buffer[i] = this->bytes[i];
 
@@ -41,6 +46,10 @@ void CustomType<T>::set(T value)
     byte* buffer = (byte*)&value;
     for(size_t i=0 ; i<this->bytes.size() ; i++)
         this->bytes[i] = buffer[i];
+	if(!this->littleEndian)
+    {
+        std::reverse(this->bytes.begin(), this->bytes.end());
+    }
 }
 
 Int24::Int24(bool littleEndian)
