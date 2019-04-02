@@ -1,6 +1,5 @@
 #include "customtype.h"
 #include <vector>
-#include <algorithm>
 #include <string>
 
 std::vector<byte> ByteType::getBytes(){return this->bytes;}
@@ -129,16 +128,6 @@ std::string Octetstring::get()
 			tempArr[i] = (char) this->bytes[i];
         else
 			tempArr[i] = (char) this->bytes[this->bytes.size() - i - 1];
-    /*if(!this->littleEndian)
-    {
-        for(size_t i=this->bytes.size()-1 ; i==0 ; i--)
-			tempArr[i] = (char) this->bytes[i];
-    }
-	else
-	{
-		for(size_t i=0 ; i<this->bytes.size() ; i++)
-			tempArr[i] = (char) this->bytes[i];
-	}*/
 
     std::string newString(tempArr);
     return newString;
