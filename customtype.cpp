@@ -4,9 +4,9 @@
 
 std::vector<byte> ByteType::getBytes(){return this->bytes;}
 
-void ByteType::setBytes(byte bytes[]){
-    for(size_t i=0 ; i<this->size() ; i++)
-        this->bytes[i] = bytes[i];
+void ByteType::setBytes(std::vector<byte> bytes){
+    for(byte i : bytes)
+        this->bytes.push_back(i);
 }
 
 size_t ByteType::size(){return this->bytes.size();}

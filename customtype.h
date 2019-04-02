@@ -10,7 +10,7 @@ protected:
     std::vector<byte> bytes;
 public:
     virtual std::vector<byte> getBytes();
-    virtual void setBytes(byte bytes[]);
+    virtual void setBytes(std::vector<byte> bytes);
     virtual size_t size();
     virtual std::string getHexString();
 };
