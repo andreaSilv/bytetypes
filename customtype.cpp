@@ -29,7 +29,7 @@ T CustomType<T>::get()
     byte* buffer = (byte*)&value;
 
 	for(size_t i=0 ; i<this->bytes.size() ; i++)
-        if(!this->littleEndian)
+        if(this->littleEndian)
 			buffer[i] = this->bytes[i];
         else
 			buffer[i] = this->bytes[this->bytes.size() - i - 1];
@@ -43,7 +43,7 @@ void CustomType<T>::set(T value)
     byte* buffer = (byte*)&value;
 
     for(size_t i=0 ; i<this->bytes.size() ; i++)
-        if(!this->littleEndian)
+        if(this->littleEndian)
             this->bytes[i] = buffer[i];
         else
             this->bytes[i] = buffer[this->bytes.size() - i - 1];
@@ -114,7 +114,7 @@ void Octetstring::set(std::string value)
     this->bytes = std::vector<byte>(value.size(),0);
 
     for(size_t i=0 ; i<this->size() ; i++)
-        if(!this->littleEndian)
+        if(this->littleEndian)
 			this->bytes[i] = (byte) value.at(i);
         else
 			this->bytes[i] = (byte) value.at(this->bytes.size() - i - 1);
@@ -124,7 +124,7 @@ std::string Octetstring::get()
     char tempArr[this->size()];
 
     for(size_t i=0 ; i<this->bytes.size() ; i++)
-        if(!this->littleEndian)
+        if(this->littleEndian)
 			tempArr[i] = (char) this->bytes[i];
         else
 			tempArr[i] = (char) this->bytes[this->bytes.size() - i - 1];
