@@ -15,6 +15,7 @@ messages.
 Main used by me to make tries
 
 ```c++
+/* main.cpp */
 #include <iostream>
 #include "customtype.h"
 
@@ -29,6 +30,14 @@ int main(int argc, char const *argv[])
     std::cout << "Hex DUMP: " << val.getHexString() << '\n';
     return 0;
 }
+```
+Build library
+```bash
+make install
+```
+Build *main.cpp*
+```bash
+g++ -o executable main.cpp customtype.a
 ```
 
 **Pull requests are welcome!!**
