@@ -3,17 +3,26 @@
 #include <algorithm>
 #include <string>
 
-template <class T>
-std::vector<byte> CustomType<T>::getBytes(){return this->bytes;}
+std::vector<byte> ByteType::getBytes(){return this->bytes;}
 
-template <class T>
-void CustomType<T>::setBytes(byte bytes[]){
+void ByteType::setBytes(byte bytes[]){
     for(size_t i=0 ; i<this->size() ; i++)
         this->bytes[i] = bytes[i];
 }
 
-template <class T>
-size_t CustomType<T>::size(){return this->bytes.size();}
+size_t ByteType::size(){return this->bytes.size();}
+
+std::string ByteType::getHexString()
+{
+    constexpr char hexmap[] = {'0', '1', '2', '3', '4', '5', '6', '7',
+                       '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
+    std::string s(this->size() * 2, ' ');
+    for (int i = 0; i < this->size(); ++i) {
+    s[2 * i]     = hexmap[(this->bytes[i] & 0xF0) >> 4];
+    s[2 * i + 1] = hexmap[this->bytes[i] & 0x0F];
+    }
+    return s;
+}
 
 template <class T>
 T CustomType<T>::get()
@@ -32,19 +41,6 @@ void CustomType<T>::set(T value)
     byte* buffer = (byte*)&value;
     for(size_t i=0 ; i<this->bytes.size() ; i++)
         this->bytes[i] = buffer[i];
-}
-
-template <class T>
-std::string CustomType<T>::getHexString()
-{
-    constexpr char hexmap[] = {'0', '1', '2', '3', '4', '5', '6', '7',
-                       '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
-    std::string s(this->size() * 2, ' ');
-    for (int i = 0; i < this->size(); ++i) {
-    s[2 * i]     = hexmap[(this->bytes[i] & 0xF0) >> 4];
-    s[2 * i + 1] = hexmap[this->bytes[i] & 0x0F];
-    }
-    return s;
 }
 
 Int24::Int24(bool littleEndian)

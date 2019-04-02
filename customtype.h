@@ -3,8 +3,7 @@
 
 typedef unsigned char byte;
 
-template <class T>
-class CustomType
+class ByteType
 {
 protected:
     bool littleEndian;
@@ -13,11 +12,15 @@ public:
     virtual std::vector<byte> getBytes();
     virtual void setBytes(byte bytes[]);
     virtual size_t size();
+    virtual std::string getHexString();
+};
 
+template <class T>
+class CustomType : public ByteType
+{
+public:
     virtual T get();
     virtual void set(T value);
-
-    virtual std::string getHexString();
 };
 
 class Int24 : public CustomType<int>
